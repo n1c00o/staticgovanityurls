@@ -31,7 +31,7 @@ jobs:
       - name: Testing project
         run: go test
       - name: Downloading goimports
-        run: go get golang.org/x/tools/cmd/goimports
+        run: go install golang.org/x/tools/cmd/goimports@latest
       - name: Formatting project
         run: goimports -e -d -l .
   # TODO: doc:
