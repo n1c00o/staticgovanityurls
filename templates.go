@@ -21,7 +21,7 @@ var indextmpl = template.Must(
     <body>
 		<h1>{{.Hostname}}</h1>
 		<ul>
-			{{range .Paths}}<li><a href="https://pkg.go.dev/{{.}}">{{.}}</a></li>{{end}}
+			{{range .Paths}}<li><a href="https://{{.}}">{{.}}</a></li>{{end}}
 		</ul>
     </body>
 </html>`),
@@ -51,7 +51,6 @@ var pathtmpl = template.Must(
 			<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0,user-scalable=yes">
 			<meta name="go-import" content="{{.Prefix}} {{.Vcs}} {{.Repo}}">
 			<meta name="go-source" content="{{.Prefix}} {{.Repo}} {{.Dir}} {{.File}}">
-			<meta http-equiv="refresh" content="0; url=https://pkg.go.dev/{{.Prefix}}">
 			<title>{{.Prefix}}</title>
 		</head>
 		<body>
