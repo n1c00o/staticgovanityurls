@@ -30,6 +30,8 @@ jobs:
         run: go build -race -v -o=staticgovanityurls .
       - name: Testing project
         run: go test
+      - name: Downloading goimports
+        run: go get golang.org/x/tools/cmd/goimports
       - name: Formatting project
         run: goimports -e -d -l .
   # TODO: doc:
