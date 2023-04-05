@@ -31,5 +31,5 @@ jobs:
       - name: Testing project
         run: go test
       - name: Formatting project
-        run: goimport -e -d -l .
+        run: goimports -e -d -l .
   # TODO: doc:
