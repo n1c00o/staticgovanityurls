@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Static Go Vanity URLs</title>
+	<meta name="author" content="Nicolas Paul" />
+	<meta name="description" content="Simple script to serve Go modules to a custom domain name." />
+	<meta name="keywords" content="golang,import,script,nicolas,paul,module,domain,custom" />
+	<meta name="referrer" content="origin" />
+	<meta name="theme-color" content="#00add8" />
+	<meta name="color-scheme" content="only light" />
+	<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0,user-scalable=yes" />
+	<meta name="creator" content="Nicolas Paul" />
+	<meta name="googlebot" content="all" />
+	<meta name="publisher" content="Nicolas Paul" />
+	<meta name="robots" content="all" />
+	<link rel="sitemap" href="/sitemap.xml" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="@ncs_pl" />
+	<meta name="twitter:creator" content="@ncs_pl" />
+	<meta name="twitter:title" content="Static Go Vanity URLs" />
+	<meta name="twitter:description" content="Simple script to serve Go modules to a custom domain name." />
+	<meta property="og:title" content="Static Go Vanity URLs" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://staticgovanityurls.nicolaspl.com/" />
+	<meta property="og:description" content="Simple script to serve Go modules to a custom domain name." />
+	<meta property="og:determiner" content="" />
+	<meta property="og:locale" content="en" />
+	<meta property="og:site_name" content="Nicolas Paul" />
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/prism.css">
+	<link rel="shortcut icon" href="favicon.svg" type="image/svg">
+</head>
+
+<body>
+	<header>
+		<nav>
+			<ul>
+				<li><strong>Static Go Vanity URL</strong></li>
+				<li><a href="/">Home</a></li>
+				<li><a href="#license">License</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<main>
+		<h1 id="static-go-vanity-urls">Static Go Vanity URLs</h1>
+		<p>
+			A simple script that allows importing Go modules on custom domain names.
+			<br />
+			Inspired from Google's <a href="https://github.com/GoogleCloudPlatform/govanityurls"
+				target="_blank"><code>GoVanityUrls</code></a>
+			system, this script generates documents at compile time so they can be hosted easily on
+			services such as <a href="https://pages.cloudflare.com">CloudFlare Pages</a> (for free).
+		</p>
+
+		<p>To see a real-word usage of the software, <a href="https://go.nicolaspl.com" target="_blank">click here</a>.
+		</p>
+
+		<h2 id="usage">Usage</h2>
+		<p>
+			Using the script is dead-simple!
+			All you need is a valid configuration file and a copy of the compiled executable.
+			If you have Go installed on the host, you can install the script by running:
+		</p>
+
+		<pre><code class="language-bash" lang="language-bash">
+			go install github.com/n1c00o/staticgovanityurls@latest
+		</code></pre>
+
+		<p>
+			Once the binary is installed – and available in <code>$PATH</code>,
+			you will need to write a configuration file.
+			<br />
+			Here is a sample one:
+		</p>
+
+		<pre><code class="language-yaml" lang="language-yaml">
+			hostname: go.example.com 
+			paths: 
+				- prefix: foo 
+				  repository: https://github.com/example/foo.git 
+				  vcs: git 
+				  dir: https://github.com/example/foo/tree/master{/dir} 
+				  file: https://github.com/example/foo/blob/master{/dir}/{file}#L{line} 
+				- prefix: bar 
+				  repository: https://svn.example.com/~baz/bar.svn 
+				  vcs: svn 
+				  dir: https://svn.example.com/~baz/bar.svn{/dir} 
+				  file: https://svn.example.com/~baz/bar.svn{/dir}/{file}#{line} 
+		</code></pre>
+
+		<p>When you are ready, you can generate HTML documents by executing:</p>
+
+		<pre><code class="language-shell" lang="language-bash">
+			staticgovanityurls -i=vanity.yaml -o=dist
+		</code></pre>
+
+		<p><i>The <code>i</code> flag indicates the configuration file to use; <code>o</code> defines the output
+				directory.</i></p>
+
+		<p>Inside the <code>dist</code> directory, you should find a set of files as follows:</p>
+
+		<img src="img/example-files.png"
+			alt="Three HTML documents containing the generated configuration for Go tools.">
+
+		<h2 id="configuration">Configuration</h2>
+		<p>Configuration is done in a YAML document, commonly named <code>vanity.yml</code>.</p>
+
+		<h3 id="top-level-configuration">Top Level Configuration</h3>
+		<table border="1">
+			<thead>
+				<tr>
+					<th>Key</th>
+					<th>Type</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><code>hostname</code></td>
+					<td>String <i>(required)</i></td>
+					<td>The custom domain to use for imports, e.g. <code>example.com</code>.</td>
+				</tr>
+				<tr>
+					<td><code>paths</code></td>
+					<td>List of <a href="#path-level-configuration">paths</a> <i>(required)</i></td>
+					<td>A list of path items.</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<h3 id="path-level-configuration">Path Level Configuration</h3>
+		<table border="1">
+			<thead>
+				<tr>
+					<th>Key</th>
+					<th>Type</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><code>prefix</code></td>
+					<td>String <i>(required)</i></td>
+					<td>The prefix to use after <code>hostname</code> in the import path, e.g. <code>foo</code>.</td>
+				</tr>
+				<tr>
+					<td><code>repository</code></td>
+					<td>String <i>(required)</i></td>
+					<td>Link of the module source code repository, e.g. <code>code.example.com/svn/foo</code></td>
+				</tr>
+				<tr>
+					<td><code>vcs</code></td>
+					<td>String <i>(required)</i></td>
+					<td>The version control system used, one of: <code>"git"</code> (Git), <code>"svn"</code>
+						(Subversion),
+						<code>"bzr"</code> (Bazaar), <code>"hg"</code> (Mercurial) and <code>"fossil"</code> (Fossil).
+					</td>
+				</tr>
+				<tr>
+					<td><code>dir</code></td>
+					<td>String <i>(optional)</i></td>
+					<td>URL to a document listing the files inside a directory of the module. It supports substitutions
+						from
+						the <a href="https://github.com/golang/gddo/wiki/Source-Code-Links"
+							target="_blank"><code>go-source</code></a> meta tag.</td>
+				</tr>
+				<tr>
+					<td><code>file</code></td>
+					<td>String <i>(optional)</i></td>
+					<td>URL to a document listing the content – lines – inside a file of the module. It supports
+						substitutions from
+						the <a href="https://github.com/golang/gddo/wiki/Source-Code-Links"
+							target="_blank"><code>go-source</code></a> meta tag.</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<h3 id="configuration-example">Configuration Example</h3>
+		<pre><code class="language-yaml" lang="yaml">
+			---
+			hostname: go.example.com
+			paths:
+				# This will make the module available at go.example.com/foo
+				- prefix: foo
+				  repository: git.example.com/~hi/foo.git
+				  vcs: git
+				  dir: git.example.com/~hi/foo.git/tree/master{/dir}
+				  file: git.example.com/~hi/foo.git/tree/master{/dir}/{file}#line-{line}
+				# This will make the module available at example.com/bar
+				- prefix: bar
+				  repository: hg.example.com/~user1/bar
+				  vcs: hg
+				# This will make the module available at example.com/baz
+				- prefix: baz
+				  repository: corp.example.com/ADMIN/PRIVATE/very-private-svn
+				  vcs: svn
+		</code></pre>
+
+		<h2>License</h2 id="license">
+		<p>The project is governed by a BSD-style license that can be found <a
+				href="https://github.com/n1c00o/staticgovanityurls/blob/master/LICENSE">here</a>.</p>
+
+		<p>The Gopher illustrations are licensed under <a
+				href="https://github.com/egonelbre/gophers/blob/master/LICENSE-CC0">CC0 license</a>.</p>
+	</main>
+
+	<footer>
+		<hr />
+
+		<ul>
+			<li><a href="/">Website</a></li>
+			<li><a href="https://github.com/n1c00o/staticgovanityurls" target="_blank">Source</a></li>
+			<li><a href="https://nicolaspl.com" target="_blank">Nicolas Paul</a></li>
+		</ul>
+
+		<p>© 2023</p>
+	</footer>
+
+	<script src="js/prism.js"></script>
+</body>
+
+</html>
