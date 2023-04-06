@@ -1,4 +1,4 @@
-module github.com/n1c00o/staticgovanityurls
+module go.nicolaspl.com/staticgovanityurls
 
 go 1.19
 

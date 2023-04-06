@@ -22,7 +22,8 @@ var indextmpl = template.Must(
     <body>
 		<h1>{{.Hostname}}</h1>
 		<ul>
-			{{range .Paths}}<li><a href="https://{{.}}">{{.}}</a></li>{{end}}
+			{{range .Paths}}<li><a href="https://{{.}}">{{.}}</a></li>
+			{{end}}
 		</ul>
     </body>
 </html>`),
