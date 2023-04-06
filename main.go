@@ -88,7 +88,7 @@ func main() {
 			}
 		}(pathfl)
 
-		executePath(pathfl, p.Prefix, p.Vcs, p.Repository, p.Dir, p.File)
+		executePath(pathfl, cfg.Hostname, p.Prefix, p.Vcs, p.Repository, p.Dir, p.File)
 		log.Printf("Generated %s\n", ppath)
 	}
 }

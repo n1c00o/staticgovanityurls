@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"html/template"
 	"io"
 )
@@ -64,7 +65,15 @@ var pathtmpl = template.Must(
 )
 
 // executePath generates the path template using the given variables.
-func executePath(o io.Writer, prefix string, vcs VCS, repo string, dir string, file string) error {
+func executePath(
+	o io.Writer,
+	hostname string,
+	prefix string,
+	vcs VCS,
+	repo string,
+	dir string,
+	file string,
+) error {
 	return pathtmpl.Execute(o, struct {
 		Prefix string
 		Repo   string
@@ -72,7 +81,7 @@ func executePath(o io.Writer, prefix string, vcs VCS, repo string, dir string, f
 		File   string
 		Vcs    VCS
 	}{
-		Prefix: prefix,
+		Prefix: fmt.Sprintf("%s/%s", hostname, prefix),
 		Repo:   repo,
 		Vcs:    vcs,
 		Dir:    dir,
