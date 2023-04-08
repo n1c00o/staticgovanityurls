@@ -67,7 +67,7 @@
 		</p>
 
 		<pre><code class="language-bash" lang="language-bash">
-			go install go.nicolaspl.com/staticgovanityurls@latest
+		go install go.nicolaspl.com/staticgovanityurls@latest
 		</code></pre>
 
 		<p>
@@ -78,18 +78,18 @@
 		</p>
 
 		<pre><code class="language-yaml" lang="language-yaml">
-			hostname: go.example.com 
-			paths: 
-				- prefix: foo 
-				  repository: https://github.com/example/foo.git 
-				  vcs: git 
-				  dir: https://github.com/example/foo/tree/master{/dir} 
-				  file: https://github.com/example/foo/blob/master{/dir}/{file}#L{line} 
-				- prefix: bar 
-				  repository: https://svn.example.com/~baz/bar.svn 
-				  vcs: svn 
-				  dir: https://svn.example.com/~baz/bar.svn{/dir} 
-				  file: https://svn.example.com/~baz/bar.svn{/dir}/{file}#{line} 
+		hostname: go.example.com 
+		paths: 
+			- prefix: foo 
+			  repository: https://github.com/example/foo.git 
+			  vcs: git 
+			  dir: "https://github.com/example/foo/tree/master{/dir} "
+			  file: "https://github.com/example/foo/blob/master{/dir}/{file}#L{line} "
+			- prefix: bar 
+			  repository: https://svn.example.com/~baz/bar.svn 
+			  vcs: svn 
+			  dir: "https://svn.example.com/~baz/bar.svn{/dir}"
+			  file: "https://svn.example.com/~baz/bar.svn{/dir}/{file}#{line}"
 		</code></pre>
 
 		<p>When you are ready, you can generate HTML documents by executing:</p>
@@ -181,23 +181,23 @@
 
 		<h3 id="configuration-example">Configuration Example</h3>
 		<pre><code class="language-yaml" lang="yaml">
-			---
-			hostname: go.example.com
-			paths:
-				# This will make the module available at go.example.com/foo
-				- prefix: foo
-				  repository: git.example.com/~hi/foo.git
-				  vcs: git
-				  dir: git.example.com/~hi/foo.git/tree/master{/dir}
-				  file: git.example.com/~hi/foo.git/tree/master{/dir}/{file}#line-{line}
-				# This will make the module available at example.com/bar
-				- prefix: bar
-				  repository: hg.example.com/~user1/bar
-				  vcs: hg
-				# This will make the module available at example.com/baz
-				- prefix: baz
-				  repository: corp.example.com/ADMIN/PRIVATE/very-private-svn
-				  vcs: svn
+		---
+		hostname: go.example.com
+		paths:
+			# This will make the module available at go.example.com/foo
+			- prefix: foo
+			  repository: git.example.com/~hi/foo.git
+			  vcs: git
+			  dir: "git.example.com/~hi/foo.git/tree/master{/dir}"
+			  file: "git.example.com/~hi/foo.git/tree/master{/dir}/{file}#line-{line}"
+			# This will make the module available at example.com/bar
+			- prefix: bar
+			  repository: hg.example.com/~user1/bar
+			  vcs: hg
+			# This will make the module available at example.com/baz
+			- prefix: baz
+			  repository: corp.example.com/ADMIN/PRIVATE/very-private-svn
+			  vcs: svn
 		</code></pre>
 
 		<h2>License</h2 id="license">
