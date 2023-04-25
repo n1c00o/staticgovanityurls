@@ -1,4 +1,4 @@
-module go.nc0.fr/staticgovanityurls
+module go.nicolaspl.com/staticgovanityurls
 
 go 1.19
 
