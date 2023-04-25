@@ -20,7 +20,7 @@ var indextmpl = template.Must(
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta http-equiv="content-type" content="text/html" charset="UTF-8">
         <title>{{.Hostname}}</title>
-		<meta name="generator" content="staticgovanityurls (https://staticgovanityurls.nicolaspl.com)">
+		<meta name="generator" content="staticgovanityurls (https://staticgovanityurls.nc0.fr)">
 		<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0,user-scalable=yes">
     </head>
     <body>
@@ -53,7 +53,7 @@ var pathtmpl = template.Must(
 			<meta charset="UTF-8">
 			<meta http-equiv="X-UA-Compatible" content="IE=edge">
 			<meta http-equiv="content-type" content="text/html" charset="UTF-8">
-			<meta name="generator" content="staticgovanityurls (https://staticgovanityurls.nicolaspl.com)">
+			<meta name="generator" content="staticgovanityurls (https://staticgovanityurls.nc0.fr)">
 			<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0,user-scalable=yes">
 			<meta name="go-import" content="{{.Prefix}} {{.Vcs}} {{.Repo}}">
 			<meta name="go-source" content="{{.Prefix}} {{.Repo}} {{.Dir}} {{.File}}">
