@@ -66,8 +66,6 @@ Each path is a map that contains the following fields:
 
 [^go-source]: https://github.com/golang/gddo/wiki/Source-Code-Links
 
-```yaml
-
 ## License
 
 The project is governed by a BSD-style license that can be found in the 
