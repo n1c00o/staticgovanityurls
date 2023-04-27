@@ -20,16 +20,16 @@ Here is a sample one:
 ```yaml
 hostname: "go.example.com"
 paths: 
-	- prefix: "foo" 
-	  repository: "https://github.com/example/foo.git"
-	  vcs: "git" 
-	  dir: "https://github.com/example/foo/tree/master{/dir}"
-	  file: "https://github.com/example/foo/blob/master{/dir}/{file}#L{line}"
-	- prefix: "bar" 
-	  repository: "https://svn.example.com/~baz/bar.svn"
-	  vcs: "svn" 
-	  dir: "https://svn.example.com/~baz/bar.svn{/dir}"
-	  file: "https://svn.example.com/~baz/bar.svn{/dir}/{file}#{line}"
+    - prefix: "foo" 
+      repository: "https://github.com/example/foo.git"
+      vcs: "git" 
+      dir: "https://github.com/example/foo/tree/master{/dir}"
+      file: "https://github.com/example/foo/blob/master{/dir}/{file}#L{line}"
+    - prefix: "bar" 
+      repository: "https://svn.example.com/~baz/bar.svn"
+      vcs: "svn" 
+      dir: "https://svn.example.com/~baz/bar.svn{/dir}"
+      file: "https://svn.example.com/~baz/bar.svn{/dir}/{file}#{line}"
 ```
 
 When you are ready, you can generate HTML documents by executing:
