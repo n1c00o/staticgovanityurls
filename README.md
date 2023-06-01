@@ -1,3 +1,6 @@
+> **ARCHIVED** The tool has been deprecated in favor of [SVGU](https://git.sr.ht/~n1c00o/svgu).
+> This is now deprecated
+
 # staticgovanityurls
 
 `staticgovanityurls` (Static Go Vanity URLs) is a simple script that generates
